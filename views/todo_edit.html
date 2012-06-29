@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title><%= config.site_name %></title>
+    <link href="/styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/index/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+    <div class="header box">
+        <h1><a href="/"><%= config.site_name %></a></h1>
+    </div>
+
+    <div class="main box">
+        <div class="box post">
+            <h2>修改</h2>
+            <form action="?" method="post">
+                <p><input type="text" name="title" class="long_txt" value="<%= todo.title %>" /></p>
+                <p><input type="submit" class="submit" value="提交" /></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="foot">
+        Copyright&copy; <%= config.site_name %>
+        <a href="http://cnodejs.org/">CNode</a>
+        <br />
+        修改自 <a href="http://simple-is-better.com/news/309">simple-todo</a>
+    </div>
+</div>
+</body>
+</html>
