@@ -1,0 +1,155 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: url(/img/htmlbg.$5752.png) repeat;
+    background-image: url(/img/htmlbg.$5752.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
+    background-attachment: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-size: 12px;
+    font-family: "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+    _font-family: Tahoma, Arial, Helvetica, STHeiti;
+    cursor: default;
+}
+
+div#header-holder {
+    height: 72px;
+    background: url(/img/header.$5752.png) repeat-x 0 -20px;
+}
+
+div#header {
+    width: 900px;
+    margin: 0 auto;
+    _overflow: hidden;
+}
+
+div#content-holder {
+    background: url(/img/content-holder.$5106.png) repeat-x;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    height: 100%
+}
+
+div#logo-holder {
+    float: left;
+    position: relative;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+#logo {
+    width: 85px;
+    float: left;
+    display: block;
+}
+
+#logo a {
+    display: block;
+    height: 71px;
+    width: 105px;
+    text-indent: -9999px;
+    margin-left: -5px;
+    outline: none;
+    background: url(/img/logo.png) no-repeat 0 center;
+}
+
+#global-itquan {
+    color: white;
+    padding-top: 30px;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    margin-left: 3px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+div#content {
+    width: 790px;
+    margin: 0 auto;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    position: relative;
+}
+
+div#main {
+    width: 540px;
+    float: left;
+}
+
+div#aside {
+    width: 250px;
+    float: right;
+    background: blue;
+}
+
+.user-card {
+    float: left;
+    width: 540px;
+    height: 320px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url(/img/user-card/card_bk_10.png) no-repeat 0 center;
+}
+
+.user-avatar {
+    float: left;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+    zoom: 1;
+    background: url(/img/user-avtar/avtar.png) no-repeat 0 center;
+}
+
+.user-card .nav {
+    width: 80px;
+    height: 100%;
+    float: left;
+    margin-right: 20px;
+}
+
+.user-name {
+    margin-top: 5px;
+    margin-left: 20px;
+    float: left;
+    width: 70px;
+    height: 60px;
+    font-size: 26px;
+}
+
+.user-card .attrs {
+    margin: 20px 20px 20px 20px;
+    width: 400px;
+    height: 100%;
+    font-size: 20px;
+    float: left;
+    position: relative;
+}

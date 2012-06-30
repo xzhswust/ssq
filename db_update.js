@@ -1,26 +1,21 @@
-
-var Jscex = require("jscex");
-require("jscex-parser").init();
-require("jscex-jit").init()
-
 var fs = require('fs');
 var mysql = require('mysql').Client;
 var http = require('http');
 var mysqlcli = new mysql();
 
-function mysql_init(){
+function mysql_init() {
     mysqlcli.host = 'localhost';
     mysqlcli.port = 3306;
     mysqlcli.user = 'root';
     mysqlcli.password = 'passwd';
-    mysqlcli.database = 'itquan';
+    mysqlcli.database = 'ssq';
 }
 
 var web_options = {
-    host: 'kaijiang.500wan.com',
-    port: 80,
-    path: '/ssq.shtml',
-    method: 'GET'
+    host:'kaijiang.500wan.com',
+    port:80,
+    path:'/ssq.shtml',
+    method:'GET'
 };
 
 var ssq_base_file = "./ssq_base_data.txt"
@@ -28,26 +23,26 @@ var local_max_id = 0;
 var web_max_id = 0;
 var next_update_day = 0;
 
-function read_base_data(filename){
+function read_base_data(filename) {
     var buffer = fs.readFileSync(filename, "ascii");
     var all_data = buffer.toString("ascii");
     var data_lines = all_data.split("\n");
     var ssq_items = new Array();
 
-    for(line in data_lines){
-        if(data_lines[line].length > 20){
+    for (line in data_lines) {
+        if (data_lines[line].length > 20) {
             var items = data_lines[line].split("\t");
             items[12] = "\"" + items[12] + "\"";
             ssq_items.push(items);
         }
     }
-    var sql = "insert into dbcb(id,r1,r2,r3,r4,r5,r6,blue,sum_red,sum_all,ac,sd," +
+    var sql = "insert into history(id,r1,r2,r3,r4,r5,r6,blue,sum_red,sum_all,ac,sd," +
         "date,sale,first_count,first_reward, second_count,second_reward,third_count,third_reward) values(";
 
-    for(id in ssq_items){
-        for(ids in ssq_items[id]){
+    for (id in ssq_items) {
+        for (ids in ssq_items[id]) {
             sql += ssq_items[id][ids];
-            if(ids < ssq_items[id].length - 1){
+            if (ids < ssq_items[id].length - 1) {
                 sql += ",";
             }
         }
@@ -64,27 +59,20 @@ function read_base_data(filename){
     });
 }
 
-function db_query(db, sql){
-    db.query(sql, function selectCb(err, results, fields) {
-        if (err) {
-            throw err;
-        }
-}
-var db_query = eval(jscex.compile())
 
-function init_dbcb(){
-    var sql = "delete from dbcb;"
+function init_dbcb() {
+    var sql = "delete from history;"
     mysqlcli.query(sql, function selectCb(err, results, fields) {
         if (err) {
             throw err;
         }
-        console.log("Clear dbcb success");
+        console.log("Clear history success");
         read_base_data(ssq_base_file);
     });
 }
 
-function update_local_data(){
-    var sql = "select max(id) from dbcb;";
+function update_local_data() {
+    var sql = "select max(id) from history;";
     mysqlcli.query(sql, function selectCb(err, results, fields) {
         if (err) {
             throw err;
@@ -95,7 +83,7 @@ function update_local_data(){
         }
 
         local_max_id = results[0]["max(id)"];
-        if(local_max_id == null){
+        if (local_max_id == null) {
             local_max_id = "2003000";
         }
 
@@ -105,14 +93,14 @@ function update_local_data(){
     });
 }
 
-function get_max_web_id(html){
+function get_max_web_id(html) {
     var str_start = html.indexOf("td_title01", 0);
-    if(index_start < 0){
+    if (index_start < 0) {
         return nul1;
     }
     var id_str = html.substr(str_start, 128);
     var index_start = id_str.indexOf("<strong>", 0);
-    if(index_start < 0){
+    if (index_start < 0) {
         return null;
     }
     id_str = id_str.substr(index_start + 8, 5);
@@ -120,12 +108,12 @@ function get_max_web_id(html){
     return id_str;
 }
 
-function check_web_data(){
+function check_web_data() {
     web_options.host = 'kaijiang.500wan.com';
-    web_options.path =  '/ssq.shtml';
-    web_options.method =  'GET';
+    web_options.path = '/ssq.shtml';
+    web_options.method = 'GET';
 
-    var newreq = http.request(web_options, function(res) {
+    var newreq = http.request(web_options, function (res) {
         var html = "";
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
@@ -134,61 +122,65 @@ function check_web_data(){
 
         res.on('end', function () {
             web_max_id = get_max_web_id(html);
-            if(web_max_id && web_max_id > local_max_id ){
+            if (web_max_id && web_max_id > local_max_id) {
                 var start = parseInt(local_max_id);
                 var end = parseInt(web_max_id);
-                for(var i = start + 1; i <= end; i++){
+                for (var i = start + 1; i <= end; i++) {
                     update_id_data(i);
                 }
             }
-            else{
+            else {
                 console.log("No need update: " + web_max_id);
             }
+        })
+
+        res.on('error', function(err){
+            console.log(err.description);
         })
     });
 
     newreq.end();
 }
 
-function get_item_from_html(html){
+function get_item_from_html(html) {
     var item = new Array();
     var str_start = html.indexOf("td_title01", 0);
-    if(index_start < 0){
+    if (index_start < 0) {
         return null;
     }
     var id_str = html.substr(str_start, 128);
     var index_start = id_str.indexOf("<strong>", 0);
-    if(index_start < 0){
+    if (index_start < 0) {
         return null;
     }
     id_str = id_str.substr(index_start + 8, 5);
     item[0] = id_str;
 
     index_start = html.indexOf("ball_box01", str_start);
-    if(index_start < 0){
+    if (index_start < 0) {
         return null;
     }
 
     var ball_start = html.indexOf("ball_red", index_start);
     var ball_end = html.indexOf("ball_blue", index_start);
-    if(ball_start < 0 || ball_end < 0){
+    if (ball_start < 0 || ball_end < 0) {
         return null;
     }
 
     var balls_lines = html.substr(ball_start, ball_end + 16 - ball_start);
     var lines = balls_lines.split("\n");
-    if(lines.length != 7){
+    if (lines.length != 7) {
         return null;
     }
 
     var itemid = 1;
-    for(lid in lines){
+    for (lid in lines) {
         var index = lines[lid].indexOf("\">");
-        item[itemid ++] = lines[lid].substr(index + 2, 2);
+        item[itemid++] = lines[lid].substr(index + 2, 2);
     }
 
     var sales_index = html.indexOf("cfont1", ball_end);
-    if(sales_index < 0){
+    if (sales_index < 0) {
         return null;
     }
 
@@ -202,7 +194,7 @@ function get_item_from_html(html){
 
     var first = html.indexOf("td_title02", sales_end);
     first = html.indexOf("center", first);
-    if(first < 0){
+    if (first < 0) {
         return null;
     }
     first -= 12;
@@ -210,12 +202,12 @@ function get_item_from_html(html){
 
     var moneys = money_str.split("<tr");
     var money_count = 0;
-    for(id in moneys){
+    for (id in moneys) {
         moneys[id] = moneys[id].replace(/\r/g, "");
         moneys[id] = moneys[id].replace(/\n/g, "");
         moneys[id] = moneys[id].replace(/\t/g, "");
         var tds = moneys[id].split("<td");
-        if(tds.length != 4){
+        if (tds.length != 4) {
             continue;
         }
 
@@ -225,13 +217,13 @@ function get_item_from_html(html){
 
         var val_index_start = tds[3].indexOf(">", 0);
         var val_index_end = tds[3].indexOf("<", 0);
-        var val = tds[3].substr(val_index_start + 1,  val_index_end - val_index_start - 1);
+        var val = tds[3].substr(val_index_start + 1, val_index_end - val_index_start - 1);
         val = val.replace(/,/g, "");
 
         item.push(count);
         item.push(val);
-        money_count ++;
-        if(money_count == 3){
+        money_count++;
+        if (money_count == 3) {
             break;
         }
     }
@@ -239,12 +231,12 @@ function get_item_from_html(html){
     return item;
 }
 
-function update_item_to_db(item){
-    var sql = "insert into dbcb(id,r1,r2,r3,r4,r5,r6,blue," +
+function update_item_to_db(item) {
+    var sql = "insert into history(id,r1,r2,r3,r4,r5,r6,blue," +
         "sale,first_count,first_reward, second_count,second_reward,third_count,third_reward) values(";
 
     item[0] = "20" + item[0];
-    for(id in item){
+    for (id in item) {
         sql += item[id];
         sql += ","
     }
@@ -252,14 +244,15 @@ function update_item_to_db(item){
     sql += ")";
     //console.log(sql);
 
-    if(!mysqlcli.connected){
+    if (!mysqlcli.connected) {
         mysqlcli = new mysql();
         mysql_init();
     }
 
     mysqlcli.query(sql, function selectCb(err, results, fields) {
         if (err) {
-            throw err;
+            //throw err;
+            console.log(err.description);
         }
 
         get_next_update_date();
@@ -268,12 +261,12 @@ function update_item_to_db(item){
     });
 }
 
-function update_id_data(id){
+function update_id_data(id) {
     web_options.host = 'kaijiang.500wan.com';
-    web_options.path =  '/shtml/ssq/' + id.toString() + ".shtml";
-    web_options.method =  'GET';
+    web_options.path = '/shtml/ssq/' + id.toString() + ".shtml";
+    web_options.method = 'GET';
 
-    var newreq = http.request(web_options, function(res) {
+    var newreq = http.request(web_options, function (res) {
         var html = "";
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
@@ -282,10 +275,10 @@ function update_id_data(id){
 
         res.on('end', function () {
             var item = get_item_from_html(html);
-            if(item != null){
+            if (item != null) {
                 update_item_to_db(item);
             }
-            else{
+            else {
                 cosole.log("get_item_from_html failed")
             }
         })
@@ -294,11 +287,11 @@ function update_id_data(id){
     newreq.end();
 }
 
-function get_next_update_date(){
+function get_next_update_date() {
     var curDate = new Date();
     var day = curDate.getDay();
 
-    switch(day){
+    switch (day) {
         case 0:
         case 1:
             day = 2;
@@ -319,18 +312,18 @@ function get_next_update_date(){
     return day;
 }
 
-function main(){
+function main() {
     var curDate = new Date();
     var nextDate = new Date();
     var day = curDate.getDay();
 
-    if(day != next_update_day){
+    if (day != next_update_day) {
         sleepTime = 60 * 60;
     }
-    else{
+    else {
         sleepTime = 60;
         nextDate.setHours(21, 30);
-        if(curDate >= nextDate){
+        if (curDate >= nextDate) {
             update_local_data();
         }
     }
@@ -342,6 +335,9 @@ function main(){
 }
 
 mysql_init();
+
+//
+//init_dbcb();
 
 get_next_update_date();
 

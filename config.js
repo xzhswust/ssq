@@ -9,7 +9,7 @@ var db_options = {
     port: 3306,
     user: 'root',
     password: 'passwd',
-    database: 'todo'
+    database: 'ssq'
 };
 
 var db = exports.db = new require('mysql').createClient(db_options);

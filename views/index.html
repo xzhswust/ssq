@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>双色球</title>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'PhonepadTwo';
+    src: url('css/PhonepadTwo.eot');
+    src: local('☺'), url('../public/css/PhonepadTwo.ttf') format('truetype');
+}
+
+    /*
+    body{
+       background:url(img/main-bg.gif);
+    }
+    */
+
+div#wrap {
+    width: 100%;
+}
+
+div#header-holder {
+    height: 200px;
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background: yellow;
+    border-radius: 10px;
+}
+
+div#content-holder {
+    width: 900px;
+    margin: 0 auto;
+}
+
+div#num-holder {
+    width: 100%;
+    height: 100px;
+}
+
+div#num-id {
+    border: solid 2px red;
+    border-radius: 5px;
+    margin: 10px;
+    width: 150px;
+    height: 70px;
+    float: left;
+    font-size: 80px;
+    text-align: center;
+    line-height: 70px;
+    color: red;
+    font-family: PhonepadTwo, Helvetica, sans-serif;
+}
+
+.num-val {
+    border-bottom: solid 2px red;
+    border-top: solid 2px red;
+    border-radius: 45px;
+    margin: 10px 10px 5px 5px;
+    width: 88px;
+    height: 70px;
+    float: left;
+    font-size: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-family: PhonepadTwo, Helvetica, sans-serif;
+    color: red;
+}
+
+.num-val-blue {
+    border-bottom: solid 2px blue;
+    border-top: solid 2px blue;
+    border-radius: 45px;
+    margin: 10px 5px 5px 5px;
+    width: 88px;
+    height: 75px;
+    float: left;
+    font-size: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-family: PhonepadTwo, Helvetica, sans-serif;
+    color: blue;
+}
+
+div#reward-info {
+    width: 280px;
+    height: 120px;
+    float: left;
+    margin: 10px 10px;
+}
+
+div#next-time {
+    width: 300px;
+    height: 140px;
+    float: left;
+}
+
+div#content-nav {
+    width: 150px;
+    float: left;
+
+}
+/*
+div#content {
+    width: 900px;
+    height: 400px;
+    float: left;
+    margin-bottom: 20px;
+}
+*/
+
+div#content {
+    height: 400px;
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background: yellow;
+    border-radius: 10px;
+    font-size: 70px;
+    text-align: center;
+    line-height: 400px;
+    color: blue;
+}
+
+.nva-item {
+    margin: 5px 0px;
+    width: 150px;
+    height: 60px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    background: yellow;
+    border-radius: 5px;
+}
+
+.forecast-item {
+    margin: 5px 5px 0px 5px;
+    width: 740px;
+    height: 300px;
+    background: yellow;
+    border-radius: 5px;
+}
+
+.head-info {
+    margin-left: 20px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 20px;
+}
+
+.user-info {
+    float: left;
+    width: 130px;
+    height: 100%;
+}
+
+.user-avtar {
+    margin: 5px;
+    height: 120px;
+    background: url(../public/img/user-avtar/avtar.png) no-repeat;
+}
+
+.user-data {
+    margin: 15px 5px 5px 5px;
+    color: red;
+}
+
+.user-forecast {
+    height: 180px;
+    width: 420px;
+    float: left;
+}
+
+.user-chose {
+    width: 420px;
+    height: 30px;
+}
+
+.num-val-small {
+    width: 35px;
+    height: 30px;
+    float: left;
+    font-size: 25px;
+    text-align: center;
+    line-height: 30px;
+    font: "Arial Black", Gadget, sans-serif;
+    color: red;
+}
+
+.user-chose-note {
+    width: 60px;
+    height: 30px;
+    float: left;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.user-chose-why {
+    padding: 5px;
+    width: 170px;
+    height: 180px;
+    float: left;
+}
+
+.forecast-title {
+    padding-left: 10px;
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: solid 2px #D96150;
+    line-height: 30px;
+}
+
+.random-six {
+    margin-top: 10px;
+    height: 90px;
+    width: 420px;
+    float: left;
+}
+
+.radom-item {
+    width: 150px;
+    height: 30px;
+    float: left;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.random-not {
+    width: 60px;
+    height: 60px;
+    float: left;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.do-sth {
+    width: 120px;
+    height: 60px;
+    float: left;
+}
+
+.reward-number {
+    font-size: 25px;
+    text-align: center;
+    line-height: 30px;
+    font-family: PhonepadTwo, Helvetica, sans-serif;
+    color: red;
+}
+
+.next-countdown {
+    font-size: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-family: PhonepadTwo, Helvetica, sans-serif;
+    color: blue;
+}
+
+.sales-info {
+    width: 250px;
+    height: 70px;
+    float: left;
+    margin: 10px 10px;
+}
+
+.login-and-reg {
+    width: 60px;
+    height: 70px;
+    float: left;
+    margin: 10px 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="wrap">
+<div id="header-holder">
+    <div id="num-holder">
+        <div id="num-id"> <%= last.id%></div>
+        <div class="num-val"><%= last.r1%></div>
+        <div class="num-val"><%= last.r2%></div>
+        <div class="num-val"><%= last.r3%></div>
+        <div class="num-val"><%= last.r4%></div>
+        <div class="num-val"><%= last.r5%></div>
+        <div class="num-val"><%= last.r6%></div>
+        <div class="num-val-blue"><%= last.blue%></div>
+    </div>
+    <div class="sales-info">
+        <table>
+            <tr>
+                <td width="60">一等奖</td>
+                <td width="40" align="right" class="reward-number"><%= last.first_count%></td>
+                <td width="20">注</td>
+                <td width="80" align="right" class="reward-number"><%= last.first_reward%></td>
+                <td width="20" align="left">万</td>
+            </tr>
+            <tr>
+                <td width="60">二等奖</td>
+                <td width="40" align="right" class="reward-number"><%= last.second_count%></td>
+                <td width="20">注</td>
+                <td width="80" align="right" class="reward-number"><%= last.second_reward%></td>
+                <td width="20" align="left">万</td>
+            </tr>
+        </table>
+    </div>
+    <div class="sales-info">
+        <table>
+            <tr>
+                <td width="70">销售额</td>
+                <td width="90" align="right" class="reward-number"><%= last.sale%></td>
+                <td width="20" align="left">万</td>
+            </tr>
+            <tr>
+                <td width="70">奖池累积</td>
+                <td width="90" align="right" class="reward-number">212,569</td>
+                <td width="20" align="left">万</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="sales-info">
+        <table>
+            <tr>
+                <!--
+                <td width="10" height="63" >下期</td>
+                <td width="90" align="right" class="next-countdown">37:25:36</td>
+                -->
+            </tr>
+        </table>
+    </div>
+
+    <div class="login-and-reg">
+        <table>
+            <tr>
+                <td width="40"><a href="/reg">注册</a></td>
+            </tr>
+            <tr>
+                <td width="90"><a href="/login">登录</a></td>
+            </tr>
+            <tr>
+                <td width="90"><a href="/todo">关于</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="content-holder">
+    <div id="content">
+      敬请期待！
+    </div>
+</div>
+<!--
+    <div id="content-holder">
+        <div id="content-nav">
+        <div class="nva-item"><a href="#">下期预测</a></div>
+        <div class="nva-item"><a href="#">数据分析</a></div>
+        <div class="nva-item"><a href="#">真假购彩</a></div>
+        <div class="nva-item"><a href="#">灌水专区</a></div>
+        </div>
+        <div id="content">
+            <div class="forecast-item">
+                <div class="forecast-title">062期  往死里整</div>
+                <div class="user-info">
+                    <div class="user-avtar"></div>
+                    <div class="user-data">邹鹏 ★★★★</div>
+                </div>
+                <div class="user-forecast">
+                    <div class="user-chose">
+                        <div class="user-chose-note">定红</div>
+                        <div class="num-val-small">1</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">15</div>
+                        <div class="num-val-small">18</div>
+                        <div class="num-val-small">32</div>
+                        <div class="num-val-small">33</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀红</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">4</div>
+                        <div class="num-val-small">5</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">定蓝</div>
+                        <div class="num-val-small">1</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">5</div>
+                        <div class="num-val-small">8</div>
+                        <div class="num-val-small">12</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀蓝</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">4</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="random-six">
+                        <div class="random-not">机选 两注</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                       </div>
+                    <div class="">
+                        <div class="do-sth"><a href="#">点评</a></div>
+                        <div class="do-sth"><a href="#">顶一个</a></div>
+                        <div class="do-sth"><a href="#">摔一个</a></div>
+                    </div>
+                </div>
+                <div class="user-chose-why">第2012058期开奖回顾：出号为红球03，06，15，20，25，26蓝球04</div>
+            </div>
+            <div class="forecast-item">
+                <div class="forecast-title">062期  看好红8</div>
+                <div class="user-info">
+                    <div class="user-avtar"></div>
+                    <div class="user-data">猪八戒 ★★</div>
+                </div>
+                <div class="user-forecast">
+                    <div class="user-chose">
+                        <div class="user-chose-note">定红</div>
+                        <div class="num-val-small">33</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                        <div class="num-val-small">29</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀红</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">定蓝</div>
+                        <div class="num-val-small">1</div>
+                        <div class="num-val-small">8</div>
+                        <div class="num-val-small">12</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀蓝</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">4</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="random-six">
+                        <div class="random-not">机选 两注</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                       </div>
+                    <div class="">
+                        <div class="do-sth"><a href="#">点评</a></div>
+                        <div class="do-sth"><a href="#">顶一个</a></div>
+                        <div class="do-sth"><a href="#">摔一个</a></div>
+                    </div>
+                </div>
+                <div class="user-chose-why">第2012058期开奖回顾：出号为红球03，06，15，20，25，26蓝球04</div>
+            </div>
+            <div class="forecast-item">
+                <div class="forecast-title">062期  杀蓝8</div>
+                <div class="user-info">
+                    <div class="user-avtar"></div>
+                    <div class="user-data">猪八戒 ★★</div>
+                </div>
+                <div class="user-forecast">
+                    <div class="user-chose">
+                        <div class="user-chose-note">定红</div>
+                        <div class="num-val-small">1</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">15</div>
+                        <div class="num-val-small">18</div>
+                        <div class="num-val-small">32</div>
+                        <div class="num-val-small">33</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀红</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">4</div>
+                        <div class="num-val-small">5</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">定蓝</div>
+                        <div class="num-val-small">1</div>
+                        <div class="num-val-small">3</div>
+                        <div class="num-val-small">5</div>
+                        <div class="num-val-small">8</div>
+                        <div class="num-val-small">12</div>
+                    </div>
+                    <div class="user-chose">
+                        <div class="user-chose-note">杀蓝</div>
+                        <div class="num-val-small">2</div>
+                        <div class="num-val-small">4</div>
+                        <div class="num-val-small">6</div>
+                        <div class="num-val-small">7</div>
+                    </div>
+                    <div class="random-six">
+                        <div class="random-not">机选 两注</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                        <div class="radom-item">1 2 3 4 5 6 7</div>
+                       </div>
+                    <div class="">
+                        <div class="do-sth"><a href="#">点评</a></div>
+                        <div class="do-sth"><a href="#">顶一个</a></div>
+                        <div class="do-sth"><a href="#">摔一个</a></div>
+                    </div>
+                </div>
+                <div class="user-chose-why">第2012058期开奖回顾：出号为红球03，06，15，20，25，26蓝球04</div>
+            </div>
+            <div class="forecast-item"></div>
+            <div class="forecast-item"></div>
+            <div class="forecast-item"></div>
+            <div class="forecast-item"></div>
+            <div class="forecast-item"></div>
+        </div>
+    </div>
+-->
+</div>
+
+</body>
+</html>
