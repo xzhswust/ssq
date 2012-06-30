@@ -1,9 +1,8 @@
-/**
+﻿/**
  * Created with JetBrains WebStorm.
  * User: zoupeng
  * Date: 12-6-29
- * Time: 下午7:44
- * To change this template use File | Settings | File Templates.
+ * Time: 19:44
  */
 
 
@@ -21,7 +20,7 @@ if(process.argv.length > 1) {
     });
 
     if(!ifChild) {
-        newArgv.push('-run_in_child');//子进程需要一个命令标志：run_in_child
+        newArgv.push('-run_in_child');
         Monitor();
         function Monitor()
         {
